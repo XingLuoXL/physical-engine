@@ -60,13 +60,13 @@ void Circle::collidemove(int height,int width,float time)
 	float moveY = speedy * time;
 
 	//判断与地面距离以及速度，过小则直接终止运动
-	if (y + moveY > height - r - 3.0 && speedy >= 0 && speedy <= 2.0 )
+	if (y + moveY > height - r - 3.0 && speedy >= -1.0 && speedy <= 2.0 )
 	{
 		speedy = 0;//y方向速度清零
 
 		//x方向边界
 		if (x + moveX<r || x + moveX>width - r)
-			speedx = -0.9 * speedx;//设置碰撞时能量损耗
+			speedx = -0.95 * speedx;//设置碰撞时能量损耗
 		y = height - r;
 		x += speedx * time;
 	}
@@ -76,10 +76,10 @@ void Circle::collidemove(int height,int width,float time)
 
 		//x方向边界
 		if (x + moveX<r || x + moveX>width - r)
-			speedx = -0.9 * speedx;
+			speedx = -0.95 * speedx;
 		//y方向边界
 		if (y + moveY<r || y + moveY>height - r)
-			speedy = -0.85 * (speedy)+g;
+			speedy = -0.9 * (speedy)+g;
 		else
 			speedy += g;
 
