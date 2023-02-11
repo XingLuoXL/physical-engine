@@ -1,7 +1,2 @@
-﻿  Circle.cpp
-C:\Users\万天瑞\source\repos\Project2\Project2\Circle.cpp(8,19): warning C4244: “参数”: 从“float”转换到“int”，可能丢失数据
-C:\Users\万天瑞\source\repos\Project2\Project2\Circle.cpp(8,16): warning C4244: “参数”: 从“float”转换到“int”，可能丢失数据
-C:\Users\万天瑞\source\repos\Project2\Project2\Circle.cpp(8,13): warning C4244: “参数”: 从“float”转换到“int”，可能丢失数据
-C:\Users\万天瑞\source\repos\Project2\Project2\Circle.cpp(56,16): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
-C:\Users\万天瑞\source\repos\Project2\Project2\Circle.cpp(59,17): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
+﻿  moving.cpp
   Project2.vcxproj -> C:\Users\万天瑞\source\repos\Project2\x64\Debug\Project2.exe

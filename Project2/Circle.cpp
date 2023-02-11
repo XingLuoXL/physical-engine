@@ -30,13 +30,22 @@ void Circle::collidecircle(Circle* ball)
 
 	//储存圆的其他信息
 	float m1 = this->m;
+	float x1 = this->x;
+	float y1 = this->y;
 	float m2 = ball->m;
+	float x2 = ball->x;
+	float y2 = ball->y;
 
-	//计算碰撞后速度（动量守恒）
-	float Vx1_ = ((m1 - m2) * Vx1 + 2 * m2 * Vx2) / (m1 + m2);
-	float Vy1_ = ((m1 - m2) * Vy1 + 2 * m2 * Vy2) / (m1 + m2);
-	float Vx2_ = ((m2 - m1) * Vx2 + 2 * m1 * Vx1) / (m1 + m2);
-	float Vy2_ = ((m2 - m1) * Vy2 + 2 * m1 * Vy1) / (m1 + m2);
+	//辅助参数
+	double a = (y1 - y2) / (x1 - x2);
+	double k = m2 / m1;
+
+
+	//计算碰撞后速度（二维完全弹性碰撞公式）
+	float Vx1_ = ((1 + a * a - k + a * a * k) * Vx1 - 2 * a * k * Vy1 + 2 * k * Vx2 + 2 * a * k * Vy2) / (a * a * k + k + 1 + a * a);
+	float Vy1_ = Vy1 + a * (Vx1_ - Vx1);
+	float Vx2_ = ((Vx1 - Vx1_) / k) + Vx2;
+	float Vy2_ = a * (Vx2_ - Vx2) + Vy2;
 
 	//返回速度
 	this->speedx = Vx1_;
@@ -44,21 +53,38 @@ void Circle::collidecircle(Circle* ball)
 	ball->speedx = Vx2_;
 	ball->speedy = Vy2_;
 }
-void Circle::collidemove(int width,int height,float time)
+void Circle::collidemove(int height,int width,float time)
 {
-
-	//计算下一刻位置
+	//计算下一刻位置(无碰撞)
 	float moveX = speedx * time;
 	float moveY = speedy * time;
 
-	//x方向边界
-	if (x + moveX<r || x + moveX>width - r)
-		speedx = -0.9*speedx;//设置碰撞时能量损耗
-	//y方向边界
-	if (y + moveY<r || y + moveY>height - r)
-		speedy = -0.9 * speedy;
+	//判断与地面距离以及速度，过小则直接终止运动
+	if (y + moveY > height - r - 3.0 && speedy >= 0 && speedy <= 2.0 )
+	{
+		speedy = 0;//y方向速度清零
+
+		//x方向边界
+		if (x + moveX<r || x + moveX>width - r)
+			speedx = -0.9 * speedx;//设置碰撞时能量损耗
+		y = height - r;
+		x += speedx * time;
+	}
+	else
+	{
 
 
-	x += speedx * time;
-	y += speedy * time;
+		//x方向边界
+		if (x + moveX<r || x + moveX>width - r)
+			speedx = -0.9 * speedx;
+		//y方向边界
+		if (y + moveY<r || y + moveY>height - r)
+			speedy = -0.85 * (speedy)+g;
+		else
+			speedy += g;
+
+		x += speedx * time;
+		y += speedy * time;
+
+	}
 }

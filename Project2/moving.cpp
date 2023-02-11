@@ -29,7 +29,10 @@ int main()
 		std::abort();
 	}
 
-	initgraph(800,600);
+	int a, b;
+	cout << "输入容器的长和宽" << endl;
+	cin >> a >> b;
+	initgraph(b, a);
 	cleardevice();
 
 	while (1)
@@ -37,11 +40,12 @@ int main()
 		ball1.fill();
 		ball2.fill();
 
-		if (ball1.ifcollide(circle2, 15))ball1.collidecircle(circle2);
-		ball1.collidemove(800, 600, 15);
-		ball2.collidemove(800, 600, 15);
+		
+		if (ball1.ifcollide(circle2, 40))ball1.collidecircle(circle2);//额外留出时间防止重叠
+		ball1.collidemove(a, b, 30);
+		ball2.collidemove(a, b, 30);
 
-		Sleep(15);
+		Sleep(30);
 
 		cleardevice();
 	}
