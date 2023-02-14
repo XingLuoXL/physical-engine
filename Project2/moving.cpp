@@ -10,28 +10,28 @@ using namespace std;
 
 int main()
 {
-	//»ñÈ¡Ô²µÄÏà¹ØÊı¾İ
+	//è·å–åœ†çš„ç›¸å…³æ•°æ®
 	float x1, y1, Vx1, Vy1, r1, m1;
 	float x2, y2, Vx2, Vy2, r2, m2;
-	cout << "ÇëÊäÈëĞ¡ÇòµÄxÖá×ø±ê¡¢yÖá×ø±ê¡¢xÖáËÙ¶È¡¢yÖáËÙ¶È¡¢°ë¾¶ÒÔ¼°ÖÊÁ¿,ÓÃ¿Õ¸ñ¸ô¿ª(ËÙ¶È×îºÃ±ğÌ«¿ì)" << endl;
-	cout << "Çò1" << endl;
+	cout << "è¯·è¾“å…¥å°çƒçš„xè½´åæ ‡ã€yè½´åæ ‡ã€xè½´é€Ÿåº¦ã€yè½´é€Ÿåº¦ã€åŠå¾„ä»¥åŠè´¨é‡,ç”¨ç©ºæ ¼éš”å¼€(é€Ÿåº¦æœ€å¥½åˆ«å¤ªå¿«)" << endl;
+	cout << "çƒ1" << endl;
 	cin >> x1 >> y1 >> Vx1 >> Vy1 >> r1 >> m1;
 	Circle ball1(x1, y1, Vx1, Vy1, r1, m1);
-	cout << "Çò2" << endl;
+	cout << "çƒ2" << endl;
 	cin >> x2 >> y2 >> Vx2 >> Vy2 >> r2 >> m2;
 	Circle ball2(x2, y2, Vx2, Vy2, r2, m2);
 	Circle* circle1 = &ball1;
 	Circle* circle2 = &ball2;
 
-	//¼ì²â³õÊ¼Ô²ÊÇ·ñÏà½»
+	//æ£€æµ‹åˆå§‹åœ†æ˜¯å¦ç›¸äº¤
 	if (sqrt((x1 + x2) * (x1 + x2) + (y1 + y2) * (y1 + y2)) <= (r1 + r2))
 	{
-		cout << "ÊäÈëÔ²Ïà½»" << endl;
+		cout << "è¾“å…¥åœ†ç›¸äº¤" << endl;
 		std::abort();
 	}
 
 	int a, b;
-	cout << "ÊäÈëÈİÆ÷µÄ³¤ºÍ¿í" << endl;
+	cout << "è¾“å…¥å®¹å™¨çš„é•¿å’Œå®½" << endl;
 	cin >> a >> b;
 	initgraph(b, a);
 	cleardevice();
@@ -41,8 +41,7 @@ int main()
 		ball1.fill();
 		ball2.fill();
 
-		
-		if (ball1.ifcollide(circle2, 35))ball1.collidecircle(circle2);//¶îÍâÁô³öÊ±¼ä·ÀÖ¹Ğ¡ÇòÖØµş
+		if (ball1.ifcollide(circle2, 25))ball1.collidecircle(circle2);
 		ball1.collidemove(a, b, 25);
 		ball2.collidemove(a, b, 25);
 
